@@ -7,6 +7,10 @@ install! 'cocoapods', :deterministic_uuids => false
 production = ENV["PRODUCTION"] == "1"
 
 target 'freely_sentiance' do
+
+  pod 'RNSentianceCore', :path => '../node_modules/@sentiance-react-native/core/ios'
+
+  
   config = use_native_modules!
 
   # Flags change depending on the env values.

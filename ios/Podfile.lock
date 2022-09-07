@@ -75,6 +75,7 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
+  - Protobuf (3.21.5)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -350,7 +351,20 @@ PODS:
     - React-jsi (= 0.69.5)
     - React-logger (= 0.69.5)
     - React-perflogger (= 0.69.5)
+  - RNSentianceCore (6.0.0):
+    - React
+    - SENTSDK (~> 6.0.0)
+  - SENTSDK (6.0.2):
+    - Protobuf (~> 3.18)
+    - TensorFlowLiteC (~> 2.7.0)
+    - UnzipKit (~> 1.9)
   - SocketRocket (0.6.0)
+  - TensorFlowLiteC (2.7.0):
+    - TensorFlowLiteC/Core (= 2.7.0)
+  - TensorFlowLiteC/Core (2.7.0)
+  - UnzipKit (1.9):
+    - UnzipKit/minizip-lib (= 1.9)
+  - UnzipKit/minizip-lib (1.9)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -411,6 +425,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNSentianceCore (from `../node_modules/@sentiance-react-native/core/ios`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -428,7 +443,11 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - Protobuf
+    - SENTSDK
     - SocketRocket
+    - TensorFlowLiteC
+    - UnzipKit
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -494,6 +513,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNSentianceCore:
+    :path: "../node_modules/@sentiance-react-native/core/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -516,6 +537,7 @@ SPEC CHECKSUMS:
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Protobuf: 7504b04fffcf6662ad629694db8231f5e744327f
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
   RCTRequired: 85c60c4bde8241278be2c93420de4c65475a2151
   RCTTypeSafety: 15990f289215eb0fc65c5eb6e2610faeeda8d5e1
@@ -542,10 +564,14 @@ SPEC CHECKSUMS:
   React-RCTVibration: 42b34fde72e42446d9b08d2b9a3ddc2fa9ac6189
   React-runtimeexecutor: c778439c3c430a5719d027d3c67423b390a221fe
   ReactCommon: ab1003b81be740fecd82509c370a45b1a7dda0c1
+  RNSentianceCore: d38d8b013fa00d9bf5ec81377870a994db63cf3b
+  SENTSDK: 6bc1d4ea59c70eba3d1fa3ba700a1afc954e4dc9
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  TensorFlowLiteC: 50d75ed3640c15dcfbaf88ca4326297b445e00a1
+  UnzipKit: 40e2c20a4928f0cfde5eb05a1108c08ee3e16bdc
   Yoga: c2b1f2494060865ac1f27e49639e72371b1205fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f634ddc07dcefe70335a58f2c3700834119f618d
+PODFILE CHECKSUM: 48ee4920e17709b9406eec20d5a18ce0ecf81e8c
 
 COCOAPODS: 1.11.3
