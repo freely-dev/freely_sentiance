@@ -5,7 +5,7 @@
 #import <React/RCTRootView.h>
 
 #import <React/RCTAppSetupUtils.h>
-
+#import <RNSentianceHelper.h>
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
 #import <React/RCTCxxBridgeDelegate.h>
@@ -13,7 +13,7 @@
 #import <React/RCTSurfacePresenter.h>
 #import <React/RCTSurfacePresenterBridgeAdapter.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
-#import <RNSentianceHelper.h>
+
 
 
 #import <react/config/ReactNativeConfig.h>
@@ -48,6 +48,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"freely_sentiance", initProps);
 
   SENTInitializationResult *result = [[RNSentianceHelper alloc] initializeSDKWithLaunchOptions:launchOptions];
+  
   if (!result.isSuccessful) {
     NSLog(@"Sentiance SDK initialization failed. Error: %lu", (unsigned long)result.failureReason);
   } else {
