@@ -14,10 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: version
+      #get version from ref_name
+      - name: Get version
         id: version
         run: |
-          echo "SOURCE_TAG=${inputs.ref_name}#v" >> $GITHUB_OUTPUT
+          echo "::set-output name=SOURCE_TAG::${{ inputs.ref_name }}#"
 
 
       - uses: actions/checkout@v2
