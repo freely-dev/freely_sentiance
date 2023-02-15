@@ -1,6 +1,6 @@
 {
   "name": "freely_sentiance",
-  "version": "1.0.4",
+  "version": "1.0.27",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -10,9 +10,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@sentiance-react-native/core": "^6.0.2",
     "react": "18.0.0",
-    "react-native": "0.69.5",
-    "@sentiance-react-native/core": "^6.0.2"
+    "react-native": "0.69.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
