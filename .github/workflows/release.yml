@@ -12,5 +12,5 @@ jobs:
   draft-new-release:
     uses: ./.github/workflows/draft-new-release.yml
     with:
-      version: ${{ github.ref_name }}
+      ref_name: ${{ github.ref_name }}
 
