@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      #get version from ref_name (e.g. v1.0.0) and remove the v
       - name: Get version
         id: version
         run: |
