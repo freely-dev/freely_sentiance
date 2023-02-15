@@ -1,26 +1,30 @@
 name: "Draft new release"
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      version:
+      ref_name:
         description: 'The version you want to release.'
         required: true
+        type: string
 
 jobs:
   draft-new-release:
     name: "Draft a new release"
     runs-on: ubuntu-latest
     steps:
+
+      #get version from ref_name (e.g. v1.0.0) and remove the v
+      - name: Get version
+        id: version
+        run: |
+          echo "::set-output name=SOURCE_TAG::$(echo ${{ inputs.ref_name }} | sed 's/^v//')"
+
       - uses: actions/checkout@v2
 
       - name: Create release branch
-        run: git checkout -b release/${{ github.event.inputs.version }}
+        run: git checkout -b release/${{ steps.version.outputs.SOURCE_TAG }}
 
-      - name: Update changelog
-        uses: thomaseizinger/keep-a-changelog-new-release@1.1.0
-        with:
-          version: ${{ github.event.inputs.version }}
 
       # In order to make a commit, we need to initialize a user.
       # You may choose to write something less generic here if you want, it doesn't matter functionality wise.
@@ -32,27 +36,27 @@ jobs:
       # This step will differ depending on your project setup
       # Fortunately, yarn has a built-in command for doing this!
       - name: Bump version in package.json
-        run: yarn version --new-version ${{ github.event.inputs.version }} --no-git-tag-version
+        run: yarn version --new-version ${{ steps.version.outputs.SOURCE_TAG }} --no-git-tag-version
 
       - name: Commit changelog and manifest files
         id: make-commit
         run: |
           git add CHANGELOG.md package.json
-          git commit --message "Prepare release ${{ github.event.inputs.version }}"
+          git commit --message "Prepare release ${{ steps.version.outputs.SOURCE_TAG }}"
 
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
       - name: Push new branch
-        run: git push origin release/${{ github.event.inputs.version }}
+        run: git push origin release/${{ steps.version.outputs.SOURCE_TAG }}
 
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          head: release/${{ github.event.inputs.version }}
+          head: release/${{ steps.version.outputs.SOURCE_TAG }}
           base: master
-          title: Release version ${{ github.event.inputs.version }}
+          title: Release version ${{ steps.version.outputs.SOURCE_TAG }}
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
