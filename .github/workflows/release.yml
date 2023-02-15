@@ -12,5 +12,5 @@ jobs:
   draft-new-release:
     uses: ./.github/workflows/draft-new-release.yml
     with:
-      version: echo ${{ github.ref }} | sed "s/refs/tags/v//"
+      version: $(echo ${{ github.ref }} | sed "s/refs/tags/v//") 
 
