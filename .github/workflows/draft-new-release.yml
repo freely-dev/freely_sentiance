@@ -17,8 +17,10 @@ jobs:
       #get version from ref_name
       - name: Get version
         id: version
+        env:
+          INPUT_REF_NAME: ${{ inputs.ref_name }}
         run: |
-          echo "::set-output name=SOURCE_TAG::${{ inputs.ref_name }}#"
+          echo "::set-output name=SOURCE_TAG::${INPUT_REF_NAME}#v"
 
 
       - uses: actions/checkout@v2
