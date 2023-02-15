@@ -1,14 +1,10 @@
-name: Gitflow
-on: 
-  # To create pull requests.
+name: Publish in GitHub Package Registry
+on:  
   push:
-  # To merge pull requests if not possible during the push run. Remove if `auto-merge` is `false`.
-  pull_request_review:
-  check_run:
-    types: [completed]
+    tags:
+      - 'v*.*.*'
 
 jobs:
-
   draft-new-release:
     uses: ./.github/workflows/draft-new-release.yml
     with:
