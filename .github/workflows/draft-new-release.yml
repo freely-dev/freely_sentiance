@@ -29,27 +29,27 @@ jobs:
       # This step will differ depending on your project setup
       # Fortunately, yarn has a built-in command for doing this!
       - name: Bump version in package.json
-        run: yarn version --new-version $(${{ inputs.version }}:1) --no-git-tag-version
+        run: yarn version --new-version $(echo ${{ inputs.version }}:1) --no-git-tag-version
 
       - name: Commit changelog and manifest files
         id: make-commit
         run: |
           git add CHANGELOG.md package.json
-          git commit --message "Prepare release $(${{ inputs.version }}:1)"
+          git commit --message "Prepare release $(echo ${{ inputs.version }}:1)"
 
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
       - name: Push new branch
-        run: git push origin release/$(${{ inputs.version }}:1)
+        run: git push origin release/$(echo ${{ inputs.version }}:1)
 
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          head: release/$(${{ inputs.version }}:1)
+          head: release/$(echo ${{ inputs.version }}:1)
           base: master
-          title: Release version $(${{ inputs.version }}:1)
+          title: Release version $(echo ${{ inputs.version }}:1)
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
