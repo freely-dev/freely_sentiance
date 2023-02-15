@@ -17,7 +17,7 @@ jobs:
       - name: version
         id: version
         run: |
-          echo "SOURCE_TAG=${{ inputs.ref_name }}#v" >> $GITHUB_OUTPUT
+          echo "SOURCE_TAG=${inputs.ref_name}#v" >> $GITHUB_OUTPUT
 
 
       - uses: actions/checkout@v2
