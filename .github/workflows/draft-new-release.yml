@@ -18,7 +18,7 @@ jobs:
       - name: Get version
         id: version
         run: |
-          echo "::set-output name=SOURCE_TAG::$(echo ${{ github.event.inputs.ref_name }} | sed 's/^v//')"
+          echo "::set-output name=SOURCE_TAG::$(echo ${{ inputs.ref_name }} | sed 's/^v//')"
 
       - uses: actions/checkout@v2
 
