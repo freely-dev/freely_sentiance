@@ -1,11 +1,12 @@
 name: "Draft new release"
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       version:
         description: 'The version you want to release.'
         required: true
+        type: number
 
 jobs:
   draft-new-release:
