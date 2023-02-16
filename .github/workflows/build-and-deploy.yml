@@ -27,7 +27,7 @@ jobs:
 
 
   codepush-build-and-deploy:
-    if: ${{ inputs.codepush == 'true' }}
+    if: ${{ inputs.codepush == true }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Codepush" 
@@ -39,7 +39,7 @@ jobs:
       
 
   android-build-and-deploy:
-    if: ${{ inputs.native == 'true' }}
+    if: ${{ inputs.native == true }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Codepush" 
