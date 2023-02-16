@@ -1,0 +1,62 @@
+name: build-and-deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version you want to release.'
+        required: true
+        type: string
+        default: 2.0.0
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+        default: DEV
+      native:
+        description: 'Native'
+        required: false
+        type: boolean
+      codepush:
+        description: 'Codepush'
+        required: false
+        type: boolean
+
+
+jobs:
+
+
+  codepush-build-and-deploy:
+    if: ${{ inputs.codepush == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Codepush" 
+      - run: echo ENV ${{ inputs.environment }}
+      - run: echo VERSION ${{ inputs.version }}
+      - run: echo NATIVE ${{ inputs.native }}
+      - run: echo CODEPUSH ${{ inputs.codepush }}
+      - run: echo ${{ github.base_ref }}
+      
+
+  android-build-and-deploy:
+    if: ${{ inputs.native == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Codepush" 
+      - run: echo ENV ${{ inputs.environment }}
+      - run: echo VERSION ${{ inputs.version }}
+      - run: echo NATIVE ${{ inputs.native }}
+      - run: echo CODEPUSH ${{ inputs.codepush }}
+      - run: echo ${{ github.base_ref }}
+      
+  ios-build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Codepush" 
+      - run: echo ENV ${{ inputs.environment }}
+      - run: echo VERSION ${{ inputs.version }}
+      - run: echo NATIVE ${{ inputs.native }}
+      - run: echo CODEPUSH ${{ inputs.codepush }}
+      - run: echo ${{ github.base_ref }}
+    
+ 
