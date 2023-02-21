@@ -64,7 +64,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: draft-new-release
-    if: always() && (needs.draft-new-release.result == 'success' || needs.draft-new-release.result == 'skipped')
+    if: |
+      always() && 
+      (needs.draft-new-release.result == 'success' || needs.draft-new-release.result == 'skipped')
     steps:
       - name: Test
         run: echo "Test"
