@@ -1,4 +1,4 @@
-name: Draft new release ${{ inputs.version }}}
+name: Draft new release ${{ inputs.version }}
 
 on:
   workflow_dispatch:
