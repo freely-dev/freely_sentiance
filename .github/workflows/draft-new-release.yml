@@ -41,6 +41,9 @@ jobs:
       - name: Push new branch
         run: git push origin release/${{ inputs.version }}
 
+      - name: Echo event Create pull request
+        run: ${{ github.event.workflow_dispatch.inputs.version }}}
+
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
         env:
