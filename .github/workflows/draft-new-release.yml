@@ -41,7 +41,7 @@ jobs:
         run: git push origin release/${{ inputs.version }}
 
       - name: Echo event Create pull request
-        run: echo ${{ github.event_name }} ${{ join(['test1','',false], ', ') }}
+        run: echo ${{ join(['test1','test2'], ', ') }}
 
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.0.0
