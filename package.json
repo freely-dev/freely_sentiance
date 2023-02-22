@@ -1,6 +1,6 @@
 {
   "name": "freely_sentiance",
-  "version": "2.0.10",
+  "version": "11.0.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
