@@ -41,15 +41,14 @@ jobs:
         run: git push origin release/${{ inputs.version }}
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: release/${{ inputs.version }}
+          target_branch: develop
           title: Release version ${{ inputs.version }}
           draft: true
-          labels: |
-            release
-          reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
+          reviewer: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
           # You should obviously adopt it to say the truth depending on your release workflow :)
