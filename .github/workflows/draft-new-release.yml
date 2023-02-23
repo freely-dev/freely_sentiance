@@ -48,7 +48,7 @@ jobs:
           base: master
           title: Release version ${{ inputs.version }}
           draft: true
-          labels: bug,,duplicate
+          labels: bug,duplicate
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
