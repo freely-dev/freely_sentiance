@@ -40,18 +40,15 @@ jobs:
       - name: Push new branch
         run: git push origin release/${{ inputs.version }}
 
-      - name: Echo event Create pull request
-        run: echo ${{ join('test1','test2',false,'', ', ') }}
-
       - name: Create pull request
-        uses: thomaseizinger/create-pull-request@1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: peter-evans/create-pull-request@v4
         with:
-          head: release/${{ inputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           base: master
           title: Release version ${{ inputs.version }}
           draft: true
+          labels: |
+            release
           reviewers: ${{ github.actor }} # By default, we request a review from the person who triggered the workflow.
           # Write a nice message to the user.
           # We are claiming things here based on the `publish-new-release.yml` workflow.
