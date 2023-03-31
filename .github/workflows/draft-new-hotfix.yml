@@ -13,29 +13,29 @@ jobs:
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
-      if: startsWith(github.event.workflow_dispatch.head.ref, 'mobile') || startsWith(github.event.workflow_dispatch.head.ref, 'web') || startsWith(github.event.workflow_dispatch.head.ref, 'ziggy')
+      if: startsWith(github.ref_name, 'mobile') || startsWith(github.ref_name, 'web') || startsWith(github.ref_name, 'ziggy')
       steps:
         - name: Extract version from tag name 
-          if: startsWith(github.event.workflow_dispatch.head.ref, 'mobile')
+          if: startsWith(github.ref_name, 'mobile')
           run: |
-              TAG_NAME="${{ github.event.workflow_dispatch.head.ref }}"
+              TAG_NAME="${{ github.ref_name }}"
               VERSION=${TAG_NAME#mobile-v}
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
               echo "PROJECT=mobile" >> $GITHUB_ENV
     
 
         - name: Extract version from tag name 
-          if: startsWith(github.event.workflow_dispatch.head.ref, 'web')
+          if: startsWith(github.ref_name, 'web')
           run: |
-              TAG_NAME="${{ github.event.workflow_dispatch.head.ref }}"
+              TAG_NAME="${{ github.ref_name }}"
               VERSION=${TAG_NAME#web-v}
               echo "PROJECT=web" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
         - name: Extract version from tag name 
-          if: startsWith(github.event.workflow_dispatch.head.ref, 'ziggy')
+          if: startsWith(github.ref_name, 'ziggy')
           run: |
-              TAG_NAME="${{ github.event.workflow_dispatch.head.ref }}"
+              TAG_NAME="${{ github.ref_name }}"
               VERSION=${TAG_NAME#ziggy-v}
               echo "PROJECT=ziggy" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
