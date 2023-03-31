@@ -1,4 +1,4 @@
-name: Draft new release 
+name: Draft new hotfix 
 run-name: Draft new release ${{ inputs.version }}
 on:
   workflow_dispatch:
@@ -13,29 +13,29 @@ jobs:
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
-      if: startsWith(github.ref_name, 'mobile') || startsWith(github.ref_name, 'web') || startsWith(github.ref_name, 'ziggy')
+      if: startsWith($GITHUB_REF, 'mobile') || startsWith($GITHUB_REF, 'web') || startsWith($GITHUB_REF, 'ziggy')
       steps:
         - name: Extract version from tag name 
-          if: startsWith(github.ref_name, 'mobile')
+          if: startsWith($GITHUB_REF, 'mobile')
           run: |
-              TAG_NAME="${{ github.ref_name }}"
+              TAG_NAME="${{ $GITHUB_REF }}"
               VERSION=${TAG_NAME#mobile-v}
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
               echo "PROJECT=mobile" >> $GITHUB_ENV
     
 
         - name: Extract version from tag name 
-          if: startsWith(github.ref_name, 'web')
+          if: startsWith($GITHUB_REF, 'web')
           run: |
-              TAG_NAME="${{ github.ref_name }}"
+              TAG_NAME="${{ $GITHUB_REF }}"
               VERSION=${TAG_NAME#web-v}
               echo "PROJECT=web" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
         - name: Extract version from tag name 
-          if: startsWith(github.ref_name, 'ziggy')
+          if: startsWith($GITHUB_REF, 'ziggy')
           run: |
-              TAG_NAME="${{ github.ref_name }}"
+              TAG_NAME="${{ $GITHUB_REF }}"
               VERSION=${TAG_NAME#ziggy-v}
               echo "PROJECT=ziggy" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
