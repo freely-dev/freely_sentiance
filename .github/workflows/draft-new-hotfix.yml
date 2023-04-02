@@ -10,38 +10,45 @@ on:
         required: true
 
 jobs:
-  log:
+  get-tag-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Log
-        run: echo ${{ github.ref }}
+      - name: Get tag name
+        id: get-tag-name
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const tag = context.ref.replace('refs/tags/', '')
+            core.setOutput('tag', tag)
+            console.log(`Tag name is ${tag}`)
 
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
-      if: startsWith(github.ref, 'mobile') || startsWith(github.ref, 'web') || startsWith(github.ref, 'ziggy')
+      if: startsWith( steps.get-tag-name.outputs.tag , 'mobile') || startsWith( steps.get-tag-name.outputs.tag , 'web') || startsWith( steps.get-tag-name.outputs.tag , 'ziggy')
       steps:
         - name: Extract version from tag name 
-          if: startsWith(github.ref, 'mobile')
+          if: startsWith(steps.get-tag-name.outputs.tag, 'mobile')
           run: |
-              TAG_NAME="${{ github.ref }}"
+              TAG_NAME="${{ steps.get-tag-name.outputs.tag }}"
               VERSION=${TAG_NAME#mobile-v}
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
               echo "PROJECT=mobile" >> $GITHUB_ENV
     
 
         - name: Extract version from tag name 
-          if: startsWith(github.ref, 'web')
+          if: startsWith(steps.get-tag-name.outputs.tag, 'web')
           run: |
-              TAG_NAME="${{ github.ref }}"
+              TAG_NAME="${{ steps.get-tag-name.outputs.tag }}"
               VERSION=${TAG_NAME#web-v}
               echo "PROJECT=web" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
         - name: Extract version from tag name 
-          if: startsWith(github.ref, 'ziggy')
+          if: startsWith(steps.get-tag-name.outputs.tag, 'ziggy')
           run: |
-              TAG_NAME="${{ github.ref }}"
+              TAG_NAME="${{ steps.get-tag-name.outputs.tag }}"
               VERSION=${TAG_NAME#ziggy-v}
               echo "PROJECT=ziggy" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
