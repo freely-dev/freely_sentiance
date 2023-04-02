@@ -10,24 +10,20 @@ on:
         required: true
 
 jobs:
-  get-tag-name:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get tag name
-        id: get-tag-name
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const tag = context.ref.replace('refs/tags/', '')
-            core.setOutput('tag', tag)
-            console.log(`Tag name is ${tag}`)
-
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
       if: startsWith( steps.get-tag-name.outputs.tag , 'mobile') || startsWith( steps.get-tag-name.outputs.tag , 'web') || startsWith( steps.get-tag-name.outputs.tag , 'ziggy')
       steps:
+        - name: Get tag name
+          id: get-tag-name
+          uses: actions/github-script@v5
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            script: |
+              const tag = context.ref.replace('refs/tags/', '')
+              core.setOutput('tag', tag)
+              console.log(`Tag name is ${tag}`)
         - name: Extract version from tag name 
           if: startsWith(steps.get-tag-name.outputs.tag, 'mobile')
           run: |
