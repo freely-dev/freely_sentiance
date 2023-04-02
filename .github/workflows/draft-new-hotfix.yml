@@ -41,7 +41,7 @@ jobs:
         - name: Extract version from tag name 
           if: startsWith(github.ref, 'ziggy')
           run: |
-              TAG_NAME="${{ $GITHUB_REF }}"
+              TAG_NAME="${{ github.ref }}"
               VERSION=${TAG_NAME#ziggy-v}
               echo "PROJECT=ziggy" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
