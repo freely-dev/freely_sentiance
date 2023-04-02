@@ -15,31 +15,31 @@ jobs:
     steps:
       - name: Log
         run: echo ${{ github.ref }}
-        
+
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
-      if: startsWith($GITHUB_REF, 'mobile') || startsWith($GITHUB_REF, 'web') || startsWith($GITHUB_REF, 'ziggy')
+      if: startsWith(github.ref, 'mobile') || startsWith(github.ref, 'web') || startsWith(github.ref, 'ziggy')
       steps:
         - name: Extract version from tag name 
-          if: startsWith($GITHUB_REF, 'mobile')
+          if: startsWith(github.ref, 'mobile')
           run: |
-              TAG_NAME="${{ $GITHUB_REF }}"
+              TAG_NAME="${{ github.ref }}"
               VERSION=${TAG_NAME#mobile-v}
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
               echo "PROJECT=mobile" >> $GITHUB_ENV
     
 
         - name: Extract version from tag name 
-          if: startsWith($GITHUB_REF, 'web')
+          if: startsWith(github.ref, 'web')
           run: |
-              TAG_NAME="${{ $GITHUB_REF }}"
+              TAG_NAME="${{ github.ref }}"
               VERSION=${TAG_NAME#web-v}
               echo "PROJECT=web" >> $GITHUB_ENV
               echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
 
         - name: Extract version from tag name 
-          if: startsWith($GITHUB_REF, 'ziggy')
+          if: startsWith(github.ref, 'ziggy')
           run: |
               TAG_NAME="${{ $GITHUB_REF }}"
               VERSION=${TAG_NAME#ziggy-v}
