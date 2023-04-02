@@ -10,6 +10,12 @@ on:
         required: true
 
 jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo ${{ github.ref }}
+        
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
