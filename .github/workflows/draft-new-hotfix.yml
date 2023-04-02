@@ -13,7 +13,7 @@ jobs:
   get-version:
       name: get version from tag name
       runs-on: ubuntu-latest
-      if: startsWith( steps.get-tag-name.outputs.tag , 'mobile') || startsWith( steps.get-tag-name.outputs.tag , 'web') || startsWith( steps.get-tag-name.outputs.tag , 'ziggy')
+      if: startsWith( github.ref , 'refs/tags/mobile') || startsWith( github.ref , 'refs/tags/web') || startsWith( github.ref , 'refs/tags/ziggy')
       steps:
         - name: Get tag name
           id: get-tag-name
